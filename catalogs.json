@@ -1,0 +1,67 @@
+[
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "Xiaomi Робот-пылесос Mop 2 Pro",
+      "description": "Робот-пылесос для сухой и влажной уборки. Управление со смартфона",
+      "image": "photos/IMG_5018.jpg",
+      "category": "Пылесос",
+      "price": 15000.0,
+      "created_at": "2024-09-23",
+      "updated_at": "2024-09-23"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "Xiaomi Robot Vacuum E10C",
+      "description": "Универсальный специалист по мытью полов. Эффективная очистка за один проход",
+      "image": "photos/IMG_5019.jpg",
+      "category": "Пылесос",
+      "price": 10800.0,
+      "created_at": "2024-09-23",
+      "updated_at": "2024-09-23"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "name": "Polaris PIR 2430K",
+      "description": "Утюг с отпаривателем",
+      "image": "photos/IMG_5020.jpg",
+      "category": "Утюг",
+      "price": 2400.0,
+      "created_at": "2024-09-23",
+      "updated_at": "2024-09-23"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "name": "Швейная машина Comfort 10",
+      "description": "швейная машина для дома",
+      "image": "",
+      "category": "швейная машина",
+      "price": 6800.0,
+      "created_at": "2024-09-23",
+      "updated_at": "2024-09-23"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "name": "Пылесос Philips 2000",
+      "description": "безмешковый пылесос",
+      "image": "",
+      "category": "пылесос",
+      "price": 7300.0,
+      "created_at": "2024-09-23",
+      "updated_at": "2024-09-23"
+    }
+  }
+]
