@@ -16,10 +16,6 @@
                     <h4 class="my-0 font-weight-normal">{{product.name}}</h4>
                     <h5 class="card-title pricing-card-title"></h5>
                     <h5 class="card-title pricing-card-title">{{product.price}} руб.</h5>
-                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                        <li>- {{product.description|truncatechars:100 }}</li>
-
-                    </ul>
                     <a class="btn btn-primary" href="{% url 'catalog:products_detail' product.pk %}" role="button">Посмотреть</a>
 
                 </div>
