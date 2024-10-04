@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from catalog.models import Product
-
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 # Create your views here.
 def home(request):
@@ -17,11 +17,14 @@ def contacts(request):
     return render(request, 'contacts.html')
 
 
-def products_list(request):
-    product = Product.objects.all()
-    context = {'products': product}  #просто название переменной
-    return render(request, 'products_list.html', context)
+# def products_list(request):
+#     product = Product.objects.all()
+#     context = {'products': product}  #просто название переменной
+#     return render(request, 'products_list.html', context)
 
+class ProductListView(ListView):
+    model = Product
+#     catalog/product_list.html
 
 def products_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)
