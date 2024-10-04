@@ -1,4 +1,4 @@
-{% extends 'home.html' %}
+{% extends 'catalog/home.html' %}
 {% load my_tags %}
 {% block content %}
 
@@ -10,13 +10,13 @@
                     <img src="{{ product.image | media_filter }}" class="img-thumbnail">
                 </div>
                 <div class="card-body">
-                    <h4 class="my-0 font-weight-normal">{{product.name}}</h4>
+                    <h4 class="my-0 font-weight-normal">{{object.name}}</h4>
                     <h5 class="card-title pricing-card-title"></h5>
-                    <h5 class="card-title pricing-card-title">стоимость: {{product.price}} руб.</h5>
+                    <h5 class="card-title pricing-card-title">стоимость: {{object.price}} руб.</h5>
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                        <li> {{product.description}}</li>
+                        <li> {{object.description}}</li>
                     </ul>
-                    <h9 class="card-title pricing-card-title">дата создания: {{product.created_at}}</h9>
+                    <h9 class="card-title pricing-card-title">дата создания: {{object.created_at}}</h9>
                     <a class="btn btn-primary" href="#" role="button">Купить</a>
                     <a class="btn btn-primary" href="{% url 'catalog:products_list' %}" role="button">Назад</a>
 
