@@ -12,20 +12,25 @@
 </head>
 <body>
 {% include 'catalog/includes/inc_menu.html' %}
-
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">Skystore</h1>
-    <p class="lead">интернет-магазин бытовой техники</p>
-    <a class="btn btn-primary btn-sm" href="{% url 'catalog:products_create' %}" role="button">Создать товар</a>
-</div>
-
 <div class="container">
-{% block content %}
-{% endblock %}
-
+    <div class="row">
+        <div class="col">
+            <form class="row" method="post" enctype="multipart/form-data">
+                <div class="card">
+                    <div class="card-body">
+                        {%  csrf_token %}
+                        {{ form.as_p }}
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        Создать
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 {% include 'catalog/includes/inc_info.html' %}
 </div>
+
 <script src="/static/js/bootstrap.bundle.min.js"></script>
-<!-- Подключите статичеcкие файлы со скриптами Bootstrap -->
 </body>
 </html>
