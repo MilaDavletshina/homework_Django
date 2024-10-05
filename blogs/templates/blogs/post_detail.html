@@ -1,0 +1,23 @@
+{% extends 'blogs/base.html' %}
+{% load my_tags %}
+{% block content %}
+
+
+<main class="container">
+  <div class="row mb-2">
+    <div class="col-md-12">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <h3 class="mb-0">{{ post.title }}</h3>
+          <div class="mb-1 text-body-secondary">{{post.created_at}}</div>
+          <p class="card-text mb-auto">{{post.content }}</p>
+          <a class="icon-link gap-1 icon-link-hover stretched-link" href="{% url 'blogs:post_list' %}" role="button">Назад</a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+          <img src="{{ post.preview | media_filter }}" class="bd-placeholder-img" width="500" height="400"">
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}
