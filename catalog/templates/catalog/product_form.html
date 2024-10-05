@@ -21,9 +21,8 @@
                         {%  csrf_token %}
                         {{ form.as_p }}
                     </div>
-                    <button type="submit" class="btn btn-primary">
-                        Создать
-                    </button>
+                    <button type="submit" class="btn btn-primary">Создать</button>
+                    <a class="btn btn-primary" href="{% url 'catalog:products_list' %}" role="button">Назад</a>
                 </div>
             </form>
         </div>
