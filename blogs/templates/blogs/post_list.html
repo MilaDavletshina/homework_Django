@@ -18,7 +18,7 @@
           <a class="icon-link gap-1 icon-link-hover stretched-link link-danger" href="{% url 'blogs:post_delete' post.pk %}" role="button">Удалить</a>
         </div>
         <div class="col-auto d-none d-lg-block">
-          <img src="{{ post.preview | media_filter }}" class="bd-placeholder-img" width="500" height="400"">
+          <img src="{{ post.preview | media_filter }}" class="bd-placeholder-img" width="500" height="400">
         </div>
       </div>
       {% endfor %}
@@ -32,8 +32,5 @@
             <li><a href="#">Facebook</a></li>
           </ol>
         </div>
-      </div>
-    </div>
-  </div>
 </main>
 {% endblock %}

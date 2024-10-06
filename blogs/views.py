@@ -26,7 +26,7 @@ class PostCreateView(CreateView):
 
 class PostUpdateView(UpdateView):
     model = Post
-    fields = ('title', 'content', 'preview', 'is_published')
+    fields = ('title', 'content', 'preview')
     success_url = reverse_lazy('blogs:post_list')
 
 
