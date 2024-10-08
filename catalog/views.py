@@ -1,12 +1,19 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.shortcuts import render
+# from django.http import HttpResponse
 from catalog.models import Product
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
-from django.urls import reverse_lazy, reverse
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView,
+    TemplateView,
+)
+from django.urls import reverse_lazy
 
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, "home.html")
 
 
 # def contacts(request):
@@ -19,11 +26,11 @@ def home(request):
 
 
 class Contacts(TemplateView):
-    template_name = 'catalog/contacts.html'
+    template_name = "catalog/contacts.html"
 
 
 class Message(TemplateView):
-    template_name = 'catalog/message.html'
+    template_name = "catalog/message.html"
 
 
 # def products_list(request):
@@ -34,6 +41,8 @@ class Message(TemplateView):
 
 class ProductListView(ListView):
     model = Product
+
+
 #     catalog/product_list.html
 
 # def products_detail(request, pk):
@@ -48,19 +57,16 @@ class ProductDetailView(DetailView):
 
 class ProductCreateView(CreateView):
     model = Product
-    fields = ('name', 'description', 'image', 'category', 'price')
-    success_url = reverse_lazy('catalog:products_list')
+    fields = ("name", "description", "image", "category", "price")
+    success_url = reverse_lazy("catalog:products_list")
 
 
 class ProductUpdateView(UpdateView):
     model = Product
-    fields = ('name', 'description', 'image', 'category', 'price')
-    success_url = reverse_lazy('catalog:products_list')
+    fields = ("name", "description", "image", "category", "price")
+    success_url = reverse_lazy("catalog:products_list")
 
 
 class ProductDeleteView(DeleteView):
     model = Product
-    success_url = reverse_lazy('catalog:products_list')
-
-
-
+    success_url = reverse_lazy("catalog:products_list")
