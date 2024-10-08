@@ -1,4 +1,5 @@
 from django.shortcuts import render
+
 # from django.http import HttpResponse
 from catalog.models import Product
 from django.views.generic import (
