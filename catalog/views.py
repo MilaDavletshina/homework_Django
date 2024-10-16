@@ -14,7 +14,7 @@ from django.urls import reverse_lazy
 
 
 def home(request):
-    """ Главная страница"""
+    """ Главная страница """
     return render(request, "home.html")
 
 
@@ -28,12 +28,12 @@ def home(request):
 
 
 class Contacts(TemplateView):
-    """ Страница контакты"""
+    """ Страница контакты """
     template_name = "catalog/contacts.html"
 
 
 class Message(TemplateView):
-    """ Страница полученное сообщение"""
+    """ Страница полученное сообщение """
     template_name = "catalog/message.html"
 
 
@@ -44,7 +44,7 @@ class Message(TemplateView):
 
 
 class ProductListView(ListView):
-    """ Страница с продуктами"""
+    """ Страница с продуктами """
     model = Product
 
 
@@ -57,12 +57,12 @@ class ProductListView(ListView):
 
 
 class ProductDetailView(DetailView):
-    """ Страница детальное описание продукта"""
+    """ Страница детальное описание продукта """
     model = Product
 
 
 class ProductCreateView(CreateView):
-    """ Страница создание нового продукта"""
+    """ Страница создание нового продукта """
     model = Product
     form_class = ProductForm
     template_name = 'catalog/product_form.html'
@@ -70,7 +70,7 @@ class ProductCreateView(CreateView):
 
 
 class ProductUpdateView(UpdateView):
-    """ Страница редактирование продукта"""
+    """ Страница редактирование продукта """
     model = Product
     form_class = ProductForm
     template_name = 'catalog/product_form.html'
@@ -78,6 +78,6 @@ class ProductUpdateView(UpdateView):
 
 
 class ProductDeleteView(DeleteView):
-    """ Страница удаление продукта"""
+    """ Страница удаление продукта """
     model = Product
     success_url = reverse_lazy("catalog:products_list")
