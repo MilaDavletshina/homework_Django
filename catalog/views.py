@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from catalog.forms import ProductForm
 # from django.http import HttpResponse
 from catalog.models import Product
 from django.views.generic import (
@@ -14,6 +14,7 @@ from django.urls import reverse_lazy
 
 
 def home(request):
+    """ Главная страница"""
     return render(request, "home.html")
 
 
@@ -27,10 +28,12 @@ def home(request):
 
 
 class Contacts(TemplateView):
+    """ Страница контакты"""
     template_name = "catalog/contacts.html"
 
 
 class Message(TemplateView):
+    """ Страница полученное сообщение"""
     template_name = "catalog/message.html"
 
 
@@ -41,6 +44,7 @@ class Message(TemplateView):
 
 
 class ProductListView(ListView):
+    """ Страница с продуктами"""
     model = Product
 
 
@@ -53,21 +57,27 @@ class ProductListView(ListView):
 
 
 class ProductDetailView(DetailView):
+    """ Страница детальное описание продукта"""
     model = Product
 
 
 class ProductCreateView(CreateView):
+    """ Страница создание нового продукта"""
     model = Product
-    fields = ("name", "description", "image", "category", "price")
+    form_class = ProductForm
+    template_name = 'catalog/product_form.html'
     success_url = reverse_lazy("catalog:products_list")
 
 
 class ProductUpdateView(UpdateView):
+    """ Страница редактирование продукта"""
     model = Product
-    fields = ("name", "description", "image", "category", "price")
+    form_class = ProductForm
+    template_name = 'catalog/product_form.html'
     success_url = reverse_lazy("catalog:products_list")
 
 
 class ProductDeleteView(DeleteView):
+    """ Страница удаление продукта"""
     model = Product
     success_url = reverse_lazy("catalog:products_list")
