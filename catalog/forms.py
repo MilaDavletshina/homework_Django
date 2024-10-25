@@ -13,6 +13,7 @@ class ProductForm(ModelForm):
         """Стилизация форм продукта"""
         model = Product
         fields = ["name", "description", "image", "category", "price"]
+        exclude = ("owner",)
 
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)

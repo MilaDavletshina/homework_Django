@@ -1,5 +1,7 @@
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
     <h1 class="display-4">Skystore</h1>
     <p class="lead">интернет-магазин бытовой техники</p>
-    <a class="btn btn-primary btn-sm" href="{% url 'catalog:products_create' %}" role="button">Создать товар</a>
+    {% if user.is_authenticated %}
+        <a class="btn btn-primary btn-sm" href="{% url 'catalog:products_create' %}" role="button">Создать товар</a>
+    {% endif %}
 </div>
