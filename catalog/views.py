@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render
-from catalog.forms import ProductForm
+from catalog.forms import ProductForm, ProductModeratorForm
 # from django.http import HttpResponse
 from catalog.models import Product
 from django.views.generic import (
@@ -61,6 +62,13 @@ class ProductDetailView(DetailView):
     """ Страница детальное описание продукта """
     model = Product
 
+    # def get_object(self, queryset=None):
+    #     self.object = super().get_object(queryset)
+    #     if self.request.user == self.object.owner:
+    #         self.object.save()
+    #         return self.object
+    #     raise PermissionDenied
+
 
 class ProductCreateView(CreateView, LoginRequiredMixin):
     """ Страница создание нового продукта """
@@ -83,6 +91,14 @@ class ProductUpdateView(UpdateView):
     form_class = ProductForm
     template_name = 'catalog/product_form.html'
     success_url = reverse_lazy("catalog:products_list")
+
+    def get_form_class(self):
+        user = self.request.user
+        if user == self.object.owner:
+            return ProductForm
+        if user.has_perm("catalog.can_edit_description") and user.has_perm("can_unpublish_product"):
+            return ProductModeratorForm
+        raise PermissionDenied('У Вас отсутствуют права, обратитесь к администратору!')
 
 
 class ProductDeleteView(DeleteView):
