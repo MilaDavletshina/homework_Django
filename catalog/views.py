@@ -62,12 +62,12 @@ class ProductDetailView(DetailView):
     """ Страница детальное описание продукта """
     model = Product
 
-    # def get_object(self, queryset=None):
-    #     self.object = super().get_object(queryset)
-    #     if self.request.user == self.object.owner:
-    #         self.object.save()
-    #         return self.object
-    #     raise PermissionDenied
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        if self.request.user == self.object.owner:
+            self.object.save()
+            return self.object
+        raise PermissionDenied
 
 
 class ProductCreateView(CreateView, LoginRequiredMixin):
