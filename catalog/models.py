@@ -24,7 +24,7 @@ class Product(models.Model):
         null=True,
         blank=True,
     )
-    unpublish = models.BooleanField(default=False, verbose_name="Статус публикации")
+    publication_status = models.BooleanField(default=False, verbose_name="Статус публикации")
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now_add=True)
     owner = models.ForeignKey(
@@ -46,7 +46,7 @@ class Product(models.Model):
         ]
         permissions = [
             ('can_unpublish_product', 'can unpublish product'),
-            ('can_delete_product', 'can delete product'),
+            ('can_edit_description', 'can edit description'),
         ]
 
 

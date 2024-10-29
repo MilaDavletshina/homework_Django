@@ -48,3 +48,8 @@ class ProductForm(ModelForm):
             raise forms.ValidationError('Цена не может быть отрицательной')
         return price
 
+
+class ProductModeratorForm(ModelForm):
+    class Meta:
+        model = Product
+        fields = ("description", 'publication_status')
