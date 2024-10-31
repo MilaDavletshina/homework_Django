@@ -70,7 +70,7 @@ class ProductDetailView(DetailView):
         raise PermissionDenied
 
 
-class ProductCreateView(CreateView, LoginRequiredMixin):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     """ Страница создание нового продукта """
     model = Product
     form_class = ProductForm
@@ -82,26 +82,41 @@ class ProductCreateView(CreateView, LoginRequiredMixin):
         user = self.request.user
         product.owner = user
         product.save()
-        return super().form.valid(form)
+        return super().form_valid(form)
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     """ Страница редактирование продукта """
     model = Product
     form_class = ProductForm
     template_name = 'catalog/product_form.html'
     success_url = reverse_lazy("catalog:products_list")
 
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        if self.request.user == self.object.owner:
+            self.object.save()
+            return self.object
+        raise PermissionDenied
+
     def get_form_class(self):
         user = self.request.user
-        if user == self.object.owner:
-            return ProductForm
-        if user.has_perm("catalog.can_edit_description") and user.has_perm("can_unpublish_product"):
+        # if user == self.object.owner:
+        #     return ProductForm
+        if user.has_perm("catalog.can_unpublish_product"):
             return ProductModeratorForm
-        raise PermissionDenied('У Вас отсутствуют права, обратитесь к администратору!')
+        # raise PermissionDenied('У Вас отсутствуют права, обратитесь к администратору!')
+        return ProductForm
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     """ Страница удаление продукта """
     model = Product
     success_url = reverse_lazy("catalog:products_list")
+
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        if self.request.user == self.object.owner:
+            self.object.save()
+            return self.object
+        raise PermissionDenied

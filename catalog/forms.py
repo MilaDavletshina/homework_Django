@@ -13,7 +13,7 @@ class ProductForm(ModelForm):
         """Стилизация форм продукта"""
         model = Product
         fields = ["name", "description", "image", "category", "price"]
-        exclude = ("owner",)
+        exclude = ('publication_status', 'owner')
 
     def __init__(self, *args, **kwargs):
         super(ProductForm, self).__init__(*args, **kwargs)
@@ -52,4 +52,5 @@ class ProductForm(ModelForm):
 class ProductModeratorForm(ModelForm):
     class Meta:
         model = Product
-        fields = ("description", 'publication_status')
+        fields = '__all__'
+        exclude = ['publication_status']

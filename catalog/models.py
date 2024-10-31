@@ -24,7 +24,7 @@ class Product(models.Model):
         null=True,
         blank=True,
     )
-    publication_status = models.BooleanField(default=False, verbose_name="Статус публикации")
+    publication_status = models.BooleanField(default=False, verbose_name="Опубликовано")
     created_at = models.DateField(auto_now_add=True)
     updated_at = models.DateField(auto_now_add=True)
     owner = models.ForeignKey(
@@ -33,7 +33,8 @@ class Product(models.Model):
         help_text='Укажите пользователя продукта',
         blank=True,
         null=True,
-        on_delete=models.SET_NULL)
+        on_delete=models.SET_NULL
+    )
 
     def __str__(self):
         return self.name
@@ -46,7 +47,6 @@ class Product(models.Model):
         ]
         permissions = [
             ('can_unpublish_product', 'can unpublish product'),
-            ('can_edit_description', 'can edit description'),
         ]
 
 
