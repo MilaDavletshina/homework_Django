@@ -14,6 +14,8 @@ from django.views.generic import (
 )
 from django.urls import reverse_lazy
 
+from catalog.services import get_products_from_cash
+
 
 def home(request):
     """ Главная страница """
@@ -49,6 +51,8 @@ class ProductListView(ListView):
     """ Страница с продуктами """
     model = Product
 
+    def get_queryset(self):
+        return get_products_from_cash()
 
 #     catalog/product_list.html
 
