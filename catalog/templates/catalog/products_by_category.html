@@ -17,14 +17,12 @@
                                             <h2>{{ product.name }}</h2>
                                             <p>{{ product.description }}</p>
                                             <p>Цена: {{ product.price }} ₽</p>
-                                            {% if product.image %}
-                                                <img src="{{ product.image.url }}" alt="{{ product.name }}" width="100">
-                                            {% endif %}
                                         </li>
                                         {% endfor %}
                                     </ul>
                                 {% else %}
                                     <p>В данной категории пока нет продуктов.</p>
+                                    <a class="btn btn-primary" href="{% url 'catalog:products_list' %}" role="button">Назад</a>
                                 {% endif %}
                             </div>
                         </div>
