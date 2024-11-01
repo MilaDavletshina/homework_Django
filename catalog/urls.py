@@ -10,13 +10,15 @@ from catalog.views import (
     ProductDeleteView,
     Contacts,
     Message,
+    CategoryListView,
+    ProductsByCategoryView
 )
 
 app_name = CatalogConfig.name
 
 
 urlpatterns = [
-    path("", ProductListView.as_view(), name="products_list"),
+    path("", cache_page(60)(ProductListView.as_view()), name="products_list"),
     path("products/<int:pk>/", cache_page(60)(ProductDetailView.as_view()), name="products_detail"),
     path("products/create", ProductCreateView.as_view(), name="products_create"),
     path(
@@ -27,4 +29,8 @@ urlpatterns = [
     ),
     path("contacts/", Contacts.as_view(), name="contacts"),
     path("message/", Message.as_view(), name="message"),
+    path("category/", CategoryListView.as_view(), name="category"),
+    path('category/<int:category_id>/', ProductsByCategoryView.as_view(), name='products_by_category'),
 ]
+
+

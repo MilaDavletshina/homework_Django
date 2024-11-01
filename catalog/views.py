@@ -3,7 +3,7 @@ from django.core.exceptions import PermissionDenied
 from django.shortcuts import render
 from catalog.forms import ProductForm, ProductModeratorForm
 # from django.http import HttpResponse
-from catalog.models import Product
+from catalog.models import Product, Category
 from django.views.generic import (
     ListView,
     DetailView,
@@ -14,7 +14,7 @@ from django.views.generic import (
 )
 from django.urls import reverse_lazy
 
-from catalog.services import get_products_from_cash
+from catalog.services import get_products_from_cash, get_products_by_category
 
 
 def home(request):
@@ -36,6 +36,19 @@ class Contacts(TemplateView):
     template_name = "catalog/contacts.html"
 
 
+class CategoryListView(ListView):
+    """ Страница категории """
+    model = Category
+    template_name = "catalog/category.html"
+
+
+class ProductsByCategoryView(ListView):
+    def get_queryset(self):
+        """Функция получения category_id"""
+        category_id = self.get('category_id')
+        return get_products_by_category(category_id=category_id)
+
+
 class Message(TemplateView):
     """ Страница полученное сообщение """
     template_name = "catalog/message.html"
@@ -50,11 +63,11 @@ class Message(TemplateView):
 class ProductListView(ListView):
     """ Страница с продуктами """
     model = Product
+#     catalog/product_list.html
 
     def get_queryset(self):
         return get_products_from_cash()
 
-#     catalog/product_list.html
 
 # def products_detail(request, pk):
 #     product = get_object_or_404(Product, pk=pk)
@@ -124,3 +137,5 @@ class ProductDeleteView(DeleteView):
             self.object.save()
             return self.object
         raise PermissionDenied
+
+

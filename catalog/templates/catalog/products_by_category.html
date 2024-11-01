@@ -1,0 +1,36 @@
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Skystore</h1>
+    <p class="lead">интернет-магазин бытовой техники</p>
+    {% if user.is_authenticated %}
+
+        <div class="row text-center">
+          <div class="container">
+            <h1 class="mt-5">Категории продуктов {{ category.name }}</h1>
+            <div class="row">
+                <div class="col">
+                    <form class="row" method="post" enctype="multipart/form-data">
+                        <div class="card">
+                            <div class="card-body">
+                                {% if products %}
+                                    <ul>{% for product in products %}
+                                        <li>
+                                            <h2>{{ product.name }}</h2>
+                                            <p>{{ product.description }}</p>
+                                            <p>Цена: {{ product.price }} ₽</p>
+                                            {% if product.image %}
+                                                <img src="{{ product.image.url }}" alt="{{ product.name }}" width="100">
+                                            {% endif %}
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    <p>В данной категории пока нет продуктов.</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+          </div>
+        </div>
+</div>
