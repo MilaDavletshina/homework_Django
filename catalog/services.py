@@ -20,15 +20,17 @@ def get_products_from_cash():
     return products
 
 
-def get_products_by_category(category_id):
+def get_products_by_category(category_name):
     """Получает данные по категориям из кэша, если кэш пуст, получает данные из БД"""
     if not CACHE_ENABLED:
-        return Product.objects.filter(category_id=category_id)
-    key = f'products_by_category_{category_id}'
+        return Product.objects.filter(category_name=category_name)
+
+    key = f'products_by_category_{category_name}'
     products = cache.get(key)
     if products is not None:
         return products
-    products = Product.objects.filter(category_id=category_id)
-    cache.set(key, products, 60)
+
+    products = list(Product.objects.filter(category__name=category_name))
+    cache.set(key, products)
 
     return products

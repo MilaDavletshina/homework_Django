@@ -1,34 +1,38 @@
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">Skystore</h1>
-    <p class="lead">интернет-магазин бытовой техники</p>
-    {% if user.is_authenticated %}
+{% extends 'catalog/home.html' %}
+{% load my_tags %}
+{% block content %}
 
-        <div class="row text-center">
-          <div class="container">
-            <h1 class="mt-5">Категории продуктов {{ category.name }}</h1>
-            <div class="row">
-                <div class="col">
-                    <form class="row" method="post" enctype="multipart/form-data">
-                        <div class="card">
-                            <div class="card-body">
-                                {% if products %}
-                                    <ul>{% for product in products %}
-                                        <li>
-                                            <h2>{{ product.name }}</h2>
-                                            <p>{{ product.description }}</p>
-                                            <p>Цена: {{ product.price }} ₽</p>
-                                        </li>
-                                        {% endfor %}
-                                    </ul>
-                                {% else %}
-                                    <p>В данной категории пока нет продуктов.</p>
-                                    <a class="btn btn-primary" href="{% url 'catalog:products_list' %}" role="button">Назад</a>
-                                {% endif %}
-                            </div>
+{% if user.is_authenticated %}
+
+<div class="row text-center">
+    <div class="card-body">
+        <h1 class="mt-5">Категории продуктов</h1>
+        <div class="row">
+            <div class="col">
+                <form class="row" method="post" enctype="multipart/form-data">
+                    <div class="card">
+                        <div class="card-body">
+                            {% if products %}
+                            <ul>{% for product in products %}
+                                <li>
+                                    <h2>{{ product.name }}</h2>
+                                    <p>Цена: {{ product.price }} ₽</p>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                                <p>В данной категории продукты отсутствуют.</p>
+                            {% endif %}
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
-          </div>
         </div>
+    </div>
 </div>
+{% endif %}
+</div>
+<div class="card-body text-center">
+    <a class="btn btn-primary" href="{% url 'catalog:category' %}" role="button">Назад</a>
+</div>
+{% endblock %}

@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from catalog.forms import ProductForm, ProductModeratorForm
 # from django.http import HttpResponse
 from catalog.models import Product, Category
@@ -42,11 +42,17 @@ class CategoryListView(ListView):
     template_name = "catalog/category.html"
 
 
-class ProductsByCategoryView(ListView):
-    def get_queryset(self):
-        """Функция получения category_id"""
-        category_id = self.get('category_id')
-        return get_products_by_category(category_id=category_id)
+class ProductsByCategoryListView(ListView):
+    model = Category
+
+    def get(self, request, category_name):
+        category_name = get_object_or_404(Category, name=category_name)
+        # category_name = self.kwargs.get('category_id')
+        products = get_products_by_category(category_name)
+
+        return render(request, 'catalog/products_by_category.html',
+                      {'category': category_name, 'products': products})
+        # return get_products_by_category(category_name=category_name)
 
 
 class Message(TemplateView):
